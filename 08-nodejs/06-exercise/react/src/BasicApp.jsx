@@ -1,6 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
 
+
+// const PORT = 3001;
+// const HOSTNAME = "http://127.0.0.1";
+// const SERVER = `${HOSTNAME}:${PORT}`;
+
 function BasicApp() {
   const [companies, setCompanies] = useState([]);
   const [name, setName] = useState();
@@ -11,6 +16,10 @@ function BasicApp() {
     // axios.get(hostname+route)
     // 2) use async await in axios
     // 3) set Response to companies by useState (setCompanies)
+    const res = await axios.get('http://127.0.0.1:3001/company')
+    console.log('http://127.0.0.1:3001/company')
+    console.log(res.data)
+    setCompanies(res.data)
   };
 
   const createCompany = async () => {
@@ -20,13 +29,17 @@ function BasicApp() {
     // body should be dynamic by state
     // 2) use async await in axios
     // 3) alert `Successful create user`
+    await axios.post('http://127.0.0.1:3001/company',{
+      name: name,
+      taxId: taxId,
+    })
   };
 
   return (
     <div>
       <h1>Basic Application</h1>
-      <button onClick={getUser}>Get Company</button>
-      <button onClick={createUser}>Create Company</button>
+      <button onClick={getCompanies}>Get Company</button>
+      <button onClick={createCompany}>Create Company</button>
       <input
         type="text"
         placeholder="name"
