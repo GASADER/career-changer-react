@@ -21,7 +21,7 @@ webServer.get("/users", (request, response) => {
 webServer.post("/users", (request, response) => {
   const name = request.body.name;
   const age = request.body.age;
-  const userId = `mock-id-${users.length}`;
+  const userId = `mock-id-${users.length + 1}`;
   users.push({ name, age, userId });
   response.send("Create User Success");
 });
